@@ -5,9 +5,10 @@ import com.mobiletrain.domain.Contact;
 import com.mobiletrain.utils.DatabaseUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public class ContactDAOImpl implements ContactDAO {
     private JdbcTemplate jdbcTemplate = DatabaseUtils.getJdbcTemplate();
 

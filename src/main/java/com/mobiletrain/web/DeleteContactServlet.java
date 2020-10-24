@@ -2,6 +2,9 @@ package com.mobiletrain.web;
 
 import com.mobiletrain.service.ContactService;
 import com.mobiletrain.service.impl.ContactServiceImpl;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Repository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,9 +13,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Configuration
+
 @WebServlet("/delete_contact")
 public class DeleteContactServlet extends HttpServlet {
     private ContactService service = new ContactServiceImpl();
+
+    @Override
+    public void init() throws ServletException {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext();
+        this.service = (ContactService) context.getBean("contactService");
+
+        super.init();
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 1. 接收数据
